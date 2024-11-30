@@ -1,0 +1,41 @@
+services:
+  dinho:
+    build: ./dinho
+    container_name: dinho
+    ports:
+      - "3001:3001"
+    restart: always
+    tty: true
+    environment:
+      - OLLAMA_URL=http://ollama:11434
+    volumes:
+      - ./dinho:/app
+    depends_on:
+      - ollama
+    networks:
+      - techfinance
+
+  ollama:
+    build: ./ollama
+    container_name: ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./ollama/Modelfile:/root/Modelfile
+      - ollama:/root/.ollama
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    pull_policy: always
+    tty: true
+    restart: always
+    networks:
+      - techfinance
+
+volumes:
+  ollama:
+
+networks:
+  techfinance:

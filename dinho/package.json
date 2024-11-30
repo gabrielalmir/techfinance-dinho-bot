@@ -1,0 +1,22 @@
+{
+  "name": "app",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch src/main.ts",
+    "build": "bun build src/main.ts --target bun --outdir ./dist",
+    "compile": "bun build src/main.ts --compile",
+    "start": "NODE_ENV=production bun dist/main.js"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "hono": "^4.6.10",
+    "ollama": "^0.5.10",
+    "zod": "^3.23.8"
+  }
+}
